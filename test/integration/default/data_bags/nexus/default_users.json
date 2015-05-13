@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "admin",
+      "first_name": "Administrator",
+      "last_name": "User",
+      "password_clear": "kitchentest",
+      "password": "308076031253f1be1c540020de491843c6b2613b",
+      "email": "root@localhost",
+      "status": "active"
+    },
+    {
+      "id": "deployment",
+      "first_name": "Deployment",
+      "last_name": "User",
+      "password_clear": "kitchentest",
+      "password": "308076031253f1be1c540020de491843c6b2613b",
+      "email": "root@localhost",
+      "status": "active"
+    }
+  ]
+}

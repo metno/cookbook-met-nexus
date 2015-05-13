@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security>
+  <version>2.0.5</version>
+  <users>
+    <% for u in @default_users %>
+    <user>
+      <id><%= u['id'] %></id>
+      <firstName><%= u['first_name'] %></firstName>
+      <lastName><%= u['last_name'] %></lastName>
+      <password><%= u['password'] %></password>
+      <status><%= u['status'] %></status>
+      <email><%= u['email'] %></email>
+    </user>
+    <% end %>
+
+    <user>
+      <id>anonymous</id>
+      <firstName>Nexus</firstName>
+      <lastName>Anonymous User</lastName>
+      <password>$shiro1$SHA-512$1024$XMbxZA/bEmpDFiJ2R7Kxew==$fncyH6wp7fNM6SkZD+nVsWjFGToe1vCTaBwW4KP0O+lW/O19PuLxFwCU5xcJU8svmJ8q/sTuYyVuk0teq4XQXg==</password>
+      <status>active</status>
+      <email>changeme2@yourcompany.com</email>
+    </user>
+
+  </users>
+
+  <userRoleMappings>
+    <userRoleMapping>
+      <userId>deployment</userId>
+      <source>default</source>
+      <roles>
+        <role>nx-deployment</role>
+        <role>repository-any-full</role>
+      </roles>
+    </userRoleMapping>
+    <userRoleMapping>
+      <userId>admin</userId>
+      <source>default</source>
+      <roles>
+        <role>nx-admin</role>
+      </roles>
+    </userRoleMapping>
+    <userRoleMapping>
+      <userId>anonymous</userId>
+      <source>default</source>
+      <roles>
+        <role>anonymous</role>
+        <role>repository-any-read</role>
+      </roles>
+    </userRoleMapping>
+  </userRoleMappings>
+</security>

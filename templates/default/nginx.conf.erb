@@ -1,0 +1,37 @@
+# Configuration managed by Chef; your changes will perish!
+
+server {
+    server_name <%= node['met-nexus']['nginx']['domain'] %>;
+    listen 80;
+    location / {
+        proxy_http_version 1.1;
+        proxy_pass http://localhost:<%= node['nexus']['conf']['application-port'] %>;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering  off;
+    }
+}
+
+server {
+    server_name <%= node['met-nexus']['nginx']['domain'] %>;
+    charset utf8;
+    listen 443 ssl;
+    ssl on;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    ssl_ciphers "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS !RC4";
+    ssl_session_cache    shared:SSL:10m;
+    ssl_session_timeout  10m;
+
+
+    ssl_certificate /etc/ssl/certs/<%= node['met-nexus']['nginx']['ssl_name'] %>.crt;
+    ssl_certificate_key /etc/ssl/private/<%= node['met-nexus']['nginx']['ssl_name'] %>.key;
+    location / {
+        proxy_http_version 1.1;
+        proxy_pass http://localhost:<%= node['nexus']['conf']['application-port'] %>;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_buffering  off;
+    }
+}
