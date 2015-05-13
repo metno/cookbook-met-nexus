@@ -40,5 +40,3 @@ firewall_rule "https" do
     protocol :tcp
     port 443
 end
-
-

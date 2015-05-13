@@ -1,0 +1,28 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+        - recipe[met-server::default]
+        - recipe[met-nexus::default]
+    attributes: {
+        "met-nexus": {
+            "nginx": {
+                "ssl_name": "default-ubuntu-1404",
+                "domain": "default-ubuntu-1404"
+             },
+            "nexus": {
+                "conf": {
+                    "application-port": '8081'
+                }
+            }
+        }
+    }

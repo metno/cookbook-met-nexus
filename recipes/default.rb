@@ -13,15 +13,15 @@ include_recipe 'simple-nexus::default'
 include_recipe 'met-server::it-geo-tf'
 include_recipe 'met-server::secrets'
 
-# Dropping reverse proxy in the first iteration. 
+# Dropping reverse proxy in the first iteration.
 # Want a DNS entry
 # We also need to updatete the base url in the nexus config.
 # include_recipe 'met-nexus::nginx'
 
 
 # This directory is created by by simple-nexus, but the template directive
-# below checks if the directory exist at "compile time". The don't exist yet, 
-# So create the directories already. 
+# below checks if the directory exist at "compile time". The don't exist yet,
+# So create the directories already.
 %w[ /var/lib/nexus /var/lib/nexus/conf ].each do |path|
   directory path do
     owner node['nexus']['user']
@@ -36,7 +36,7 @@ firewall_rule "http" do
     port node['nexus']['conf']['application-port'].to_i
 end
 
-# The default users "admin", "deployment", 
+# The default users "admin", "deployment",
 # must exist, even if LDAP is enabled.
 # Lets say you have LDAP user in in the deployment role.
 # Nexus will then use the deployment user on the behalf of
