@@ -4,7 +4,7 @@ maintainer_email 'met-api@met.no'
 license          'All rights reserved'
 description      'Installs/Configures met-nexus'
 long_description 'Installs/Configures met-nexus'
-version          '0.1.0'
+version          '0.2.0'
 
 
 depends 'met-server',   '>= 0.59.6'
