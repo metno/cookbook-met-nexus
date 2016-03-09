@@ -12,6 +12,8 @@ include_recipe 'java'
 include_recipe 'simple-nexus::default'
 include_recipe 'met-server::it-geo-tf'
 include_recipe 'met-server::secrets'
+include_recipe 'sudo'
+include_recipe 'sshd'
 
 # Dropping reverse proxy in the first iteration.
 # Want a DNS entry
@@ -52,6 +54,22 @@ template "#{node['nexus']['conf']['nexus-work']}/conf/security.xml" do
     notifies :restart, "service[nexus]"
 end
 
+
+# Add users with ssh and sudo access.
+openssh_server '/etc/ssh/sshd_config' do
+    PasswordAuthentication 'yes'
+end
+
+users = data_bag('maven_sudo_access')
+users.each do |item|
+    suser = data_bag_item('maven_sudo_access', item)
+    login_access suser['id']
+    sudo suser['id'] do
+        user      suser['id']
+        runas     'ALL'
+        commands  ['ALL']
+    end
+end
 
 # TODO:
 # Add a task to periodically remove old snapshots

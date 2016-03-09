@@ -6,3 +6,5 @@ default['nginx']['init_style'] = 'upstart'
 
 default['met-nexus']['nginx']['domain'] = node['fqdn']
 default['met-nexus']['nginx']['ssl_name'] = node['fqdn']
+
+default['authorization']['sudo']['include_sudoers_d'] = true
